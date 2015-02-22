@@ -1,0 +1,15 @@
+{
+  "name": "jsonrpc",
+  "version": "0.0.1",
+  "description": "jsonrpc 2.0 client",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "co": "^4.4.0"
+  },
+  "dependencies": {
+    "debug": "^2.1.1",
+    "split2": "^0.2.1",
+    "uid2": "0.0.3"
+  }
+}
