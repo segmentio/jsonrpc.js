@@ -1,7 +1,7 @@
 
 # jsonrpc.js
 
- Simple JSON-RPC implementation, primarily for use with Go's net/rpc/jsonrpc implementation – which seems to ignore the 2.0 spec.
+ Simple JSON-RPC implementation for node.js and eventually the browser.
 
 ```js
 var Client = require('jsonrpc.js');
@@ -46,6 +46,10 @@ $ npm install segmentio/jsonrpc.js
 ```
 DEBUG=jsonrpc
 ```
+
+## Notes
+
+This is primarily for use with Go's net/rpc/jsonrpc implementation – which seems to ignore the 2.0 spec, as errors are strings not objects.
 
 # License
 
