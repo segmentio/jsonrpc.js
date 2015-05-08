@@ -4,6 +4,7 @@
  */
 
 var debug = require('debug')('jsonrpc');
+var Promise = require('bluebird');
 var split = require('split2');
 var uid = require('uid2');
 var url = require('url');
