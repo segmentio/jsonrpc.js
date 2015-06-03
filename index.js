@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -32,6 +31,9 @@ function Client(addr) {
 
 /**
  * Call `method` with zero or more arguments.
+ *
+ * @param {String}
+ * @return {Promise}
  */
 
 Client.prototype.call = function(method){
