@@ -4,7 +4,7 @@
  Simple JSON-RPC implementation for node.js and eventually the browser.
 
 ```js
-var Client = require('jsonrpc.js');
+var Client = require('@segment/jsonrpc');
 var co = require('co');
 
 var math = new Client('tcp://localhost:5000')
