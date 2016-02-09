@@ -53,7 +53,18 @@ Client.prototype.call = function(method){
   return new Promise(function(resolve, reject){
     self.reqs[req.id] = function(res){
       if (res.error) {
-        reject(new Error(res.error));
+        var err = null;
+        // per the spec, `.error` is an object
+        // http://www.jsonrpc.org/specification#error_object
+        if (typeof res.error == 'object') {
+          err = new Error(res.error.message);
+          err.code = res.error.code;
+          res.data = res.error.data;
+        } else {
+          // we don't follow specifications for some reaosn
+          err = new Error(res.error);
+        }
+        reject(err);
       } else {
         resolve(res.result);
       }
