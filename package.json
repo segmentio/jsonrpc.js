@@ -1,6 +1,6 @@
 {
   "name": "@segment/jsonrpc",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "jsonrpc 2.0 client",
   "main": "index.js",
   "license": "MIT",
