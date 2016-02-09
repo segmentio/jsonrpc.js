@@ -16,5 +16,9 @@
     "debug": "^2.1.1",
     "split2": "^0.2.1",
     "uid2": "0.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/segmentio/jsonrpc.js.git"
   }
 }
