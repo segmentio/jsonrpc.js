@@ -34,7 +34,7 @@ co(function *(){
 ## Installation
 
 ```
-$ npm install segmentio/jsonrpc.js
+$ npm install @segment/jsonrpc
 ```
 
 ## Transports
