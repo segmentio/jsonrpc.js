@@ -15,7 +15,7 @@ test: node_modules
 	$(BIN)/mocha $(MOCHA_FLAGS) $(NODE_FLAGS)
 
 coverage: $(SRC) $(TESTS) node_modules
-	node $(NODE_FLAGS) $(BIN)/istanbul cover $(BIN)/mocha $(MOCHA_FLAGS) ./test
+	node $(NODE_FLAGS) $(BIN)/istanbul cover $(BIN)/_mocha $(MOCHA_FLAGS) ./test
 
 clean:
 	rm -rf coverage
