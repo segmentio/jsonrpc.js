@@ -90,7 +90,8 @@ describe('Client', function() {
                   jsonrpc: '2.0',
                   error: {
                     message: 'boom!',
-                    code: 42
+                    code: 42,
+                    data: 'data'
                   }
                 }));
 
@@ -111,6 +112,7 @@ describe('Client', function() {
             assert(err);
             assert.equal(err.message, 'boom!');
             assert.equal(err.code, 42);
+            assert.equal(err.data, 'data');
           });
         });
       });
