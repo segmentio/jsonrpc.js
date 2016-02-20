@@ -16,6 +16,14 @@ describe('Client', function() {
     mock.disable();
   });
 
+  it('should support services at port 80', function() {
+    mock.disable();
+
+    const client = new Client('tcp://some-service.segment.local/rpc');
+    client.sock.destroy();
+    assert.equal(client.addr.port, 80);
+  });
+
   describe('.call(method, ...)', function() {
     it('should call the correct method', function*() {
       let called = false;
