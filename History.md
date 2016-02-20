@@ -1,4 +1,12 @@
 
+1.1.1 / 2016-02-20
+==================
+
+  * index: support port 80
+  * index: fix `err.data`
+  * Makefile: fix "coverage" target
+  * package: add "repository"
+
 1.1.0 / 2016-02-09
 ==================
 
