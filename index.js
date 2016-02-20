@@ -25,6 +25,7 @@ module.exports = Client;
 function Client(addr) {
   this.reqs = {};
   this.addr = url.parse(addr);
+  this.addr.port = this.addr.port || 80;
   this.sock = net.connect(this.addr.port, this.addr.hostname);
   this.sock.pipe(split(JSON.parse)).on('data', this.onresponse.bind(this));
 }
