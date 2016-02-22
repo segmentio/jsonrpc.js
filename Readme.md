@@ -1,4 +1,6 @@
 
+[![Build Status](https://circleci.com/gh/segmentio/jsonrpc.js/tree/master.png?style=svg)](https://circleci.com/gh/segmentio/jsonrpc.js/tree/master)
+
 # jsonrpc.js
 
  Simple JSON-RPC implementation for node.js and eventually the browser.
