@@ -25,7 +25,6 @@ describe('Client', function() {
   });
 
   describe('.call(method, ...)', function() {
-
     describe('given `opts.logger`', function () {
       it('should log the requests', function * () {
         let logged = false
