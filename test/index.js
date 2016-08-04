@@ -25,6 +25,40 @@ describe('Client', function() {
   });
 
   describe('.call(method, ...)', function() {
+    describe('given `opts.logger`', function () {
+      it('should log the requests', function * () {
+        let logged = false
+        const logger = function ({ method, duration }) {
+          assert.equal(method, 'Foo.Bar')
+          assert(duration > 100)
+          assert(duration < 200)
+          logged = true
+        }
+
+        mock.on('connection', function (socket) {
+          socket.on('data', function (buf) {
+            const { id } = JSON.parse(buf)
+            setTimeout(function () {
+              socket.write(JSON.stringify({
+                id,
+                jsonrpc: '2.0',
+                result: 42
+              }))
+
+              socket.destroy()
+            }, 100)
+          })
+        })
+
+        const client = new Client('tcp://segment.dev:4003/rpc', { logger });
+        yield client.call('Foo.Bar', { foo: 'bar' });
+        client.sock.end();
+
+        assert(logged, 'logged the request');
+      })
+    })
+
+
     it('should call the correct method', function*() {
       let called = false;
 

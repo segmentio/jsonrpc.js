@@ -22,7 +22,9 @@ module.exports = Client;
  * to be used. Currently only `tcp://` is supported.
  */
 
-function Client(addr) {
+function Client(addr, opts) {
+  opts = opts || {}
+  this.logger = opts.logger || function () {}
   this.reqs = {};
   this.addr = url.parse(addr);
   this.addr.port = this.addr.port || 80;
@@ -51,27 +53,64 @@ Client.prototype.call = function(method){
   debug('<-- %j', req);
   this.sock.write(JSON.stringify(req));
 
+  const startTime = new Date()
   return new Promise(function(resolve, reject){
-    self.reqs[req.id] = function(res){
-      if (res.error) {
-        var err = null;
-        // per the spec, `.error` is an object
-        // http://www.jsonrpc.org/specification#error_object
-        if (typeof res.error == 'object') {
-          err = new Error(res.error.message);
-          err.code = res.error.code;
-          err.data = res.error.data;
-        } else {
-          // we don't follow specifications for some reaosn
-          err = new Error(res.error);
-        }
-        reject(err);
+    self.request(req.id, function (err, result) {
+      const endTime = new Date()
+      const duration = endTime - startTime
+      self.log(method, params, duration, result, err)
+      if (err) {
+        reject(err)
       } else {
-        resolve(res.result);
+        resolve(result)
       }
-    };
+    })
   });
 };
+
+/**
+ * Make the request handler.
+ *
+ * @param {Object} id
+ * @param {Function} fn
+ * @api private
+ */
+
+Client.prototype.request = function (id, fn) {
+  this.reqs[id] = function (res) {
+    if (res.error) {
+      let err = null
+      // per the spec, `.error` is an object
+      // http://www.jsonrpc.org/specification#error_object
+      if (typeof res.error === 'object') {
+        err = new Error(res.error.message)
+        err.code = res.error.code
+        err.data = res.error.data
+      } else {
+        // we don't follow specifications for some reaosn
+        err = new Error(res.error)
+      }
+      fn(err)
+    } else {
+      fn(null, res.result)
+    }
+  }
+}
+
+/**
+ * Log the request via `this.logger`
+ *
+ * @param {String} method
+ * @param {Mixed} params
+ * @param {Number} duration
+ * @param {Mixed} result
+ * @param {Error|null} error
+ * @api private
+ */
+
+Client.prototype.log = function (method, params, duration, result, error) {
+  this.logger({ method, params, duration, result, error, addr: this.addr })
+}
 
 /**
  * Handle response.
