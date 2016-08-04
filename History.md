@@ -1,4 +1,12 @@
 
+1.2.0 / 2016-08-03
+==================
+
+  * index: add `opts.logger` support (#10)
+  * circle: test against node 6
+  * Readme: add "CircleCI" badge
+  * add `circle.yml`
+
 1.1.1 / 2016-02-20
 ==================
 
