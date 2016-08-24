@@ -1,3 +1,6 @@
+
+'use strict';
+
 /**
  * Module dependencies.
  */
@@ -53,11 +56,11 @@ Client.prototype.call = function(method){
   debug('<-- %j', req);
   this.sock.write(JSON.stringify(req));
 
-  const startTime = new Date()
+  var startTime = new Date()
   return new Promise(function(resolve, reject){
     self.request(req.id, function (err, result) {
-      const endTime = new Date()
-      const duration = endTime - startTime
+      var endTime = new Date()
+      var duration = endTime - startTime
       self.log(method, params, duration, result, err)
       if (err) {
         reject(err)
