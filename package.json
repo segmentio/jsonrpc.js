@@ -15,7 +15,7 @@
     "bluebird": "^2.9.25",
     "debug": "^2.1.1",
     "split2": "^0.2.1",
-    "uid2": "0.0.3"
+    "uid2": "0.0.4"
   },
   "repository": {
     "type": "git",
